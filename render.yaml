@@ -1,17 +1,21 @@
 services:
-  - type: static
-    name: enji-dev-website
-    env: static
-    buildCommand: cd apps/enji.dev && npm install && npm run build:static
-    staticPublishPath: ./apps/enji.dev/out
-    pullRequestPreviewsEnabled: true
-    headers:
-      - path: /*
-        name: X-Frame-Options
-        value: DENY
-      - path: /*
-        name: X-Content-Type-Options
-        value: nosniff
-      - path: /*
-        name: Referrer-Policy
-        value: strict-origin-when-cross-origin
+  - type: web
+    name: my-cv
+    env: node
+    plan: free
+    buildCommand: >
+      corepack enable &&
+      corepack prepare pnpm@9.15.2 --activate &&
+      pnpm install --frozen-lockfile &&
+      pnpm build
+    startCommand: pnpm -C apps/enji.dev start -- -p $PORT
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 18.19.0
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: SALT_IP_ADDRESS
+        sync: false
