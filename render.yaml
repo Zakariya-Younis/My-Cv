@@ -1,0 +1,17 @@
+services:
+  - type: static
+    name: enji-dev-website
+    env: static
+    buildCommand: cd apps/enji.dev && npm install && npm run build:static
+    staticPublishPath: ./apps/enji.dev/out
+    pullRequestPreviewsEnabled: true
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
