@@ -1,4 +1,4 @@
-// WithReactions removed for static export
+import WithReactions from '@/components/layouts/WithReactions';
 import WithTableOfContents from '@/components/layouts/WithTableOfContents';
 import Head from '@/components/meta/Head';
 import SkipNavigation from '@/components/navigations/SkipNavigation';
@@ -39,7 +39,7 @@ function ProjectLayout({
         {children}
         <ProjectFooter githubUrl={githubUrl} />
       </WithTableOfContents>
-      {/* Reactions disabled in static export */}
+      <WithReactions contentTitle={title} contentType="PROJECT" />
     </>
   );
 }

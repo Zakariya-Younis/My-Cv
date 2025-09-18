@@ -71,7 +71,9 @@ function QuickAccess() {
             <div className={clsx('')}>
               <ActionCenter />
             </div>
-            {/* NewPosts disabled in static export */}
+            <div className={clsx('')}>
+              <NewPosts onItemClick={() => setQuickAccessOpen(false)} />
+            </div>
             {/* Activity removed */}
             <div
               className={clsx(
